@@ -1,8 +1,45 @@
+
 @extends('layouts.app')
 
-@section('title', 'Medical Services')
+@section('title', 'Doctors')
 
 @section('content')
+
+@if(session('success'))
+
+    <div class="alert alert-success mb-6">
+
+        <span>
+            {{ session('success') }}
+        </span>
+
+    </div>
+
+@endif
+
+@if($errors->any())
+
+    <div class="alert alert-error mb-6">
+
+        <div>
+
+            <ul class="list-disc list-inside">
+
+                @foreach($errors->all() as $error)
+
+                    <li>
+                        {{ $error }}
+                    </li>
+
+                @endforeach
+
+            </ul>
+
+        </div>
+
+    </div>
+
+@endif
 
 <section class="bg-gray-50">
 
@@ -18,17 +55,17 @@
         {{-- Content --}}
         <div class="relative max-w-7xl mx-auto px-6 py-20 text-center text-white">
 
-           <span class="text-green-100 text-sm font-semibold uppercase tracking-wider">
-                Healthcare Services
-            </span>
+            <p class="text-green-100 text-sm font-semibold uppercase tracking-wider">
+                Our Medical Team
+            </p>
 
             <h1 class="mt-3 text-4xl md:text-5xl font-bold">
-                Our Medical Services
+                Our Doctors
             </h1>
 
             <p class="mt-4 max-w-2xl mx-auto text-green-50">
-                Explore our healthcare services and medical
-                specialties designed to support your health.
+                Meet our medical professionals committed to providing
+                quality and compassionate healthcare.
             </p>
 
         </div>
@@ -36,14 +73,15 @@
     </div>
 
 
-    <div class="mx-auto max-w-7xl px-6 py-20">
+    {{-- Doctors --}}
+    <div class="max-w-7xl mx-auto px-6 py-16">
 
         <!-- Filters -->
         <div class="mb-10 rounded-3xl bg-white p-6 shadow-sm">
 
             <form
                 method="GET"
-                action="{{ route('services.index') }}"
+                action="{{ route('doctors.index') }}"
                 class="grid grid-cols-1 gap-4 md:grid-cols-4"
             >
 
@@ -55,7 +93,7 @@
                         class="label"
                     >
                         <span class="label-text font-semibold">
-                            Search Services
+                            Search Doctors
                         </span>
                     </label>
 
@@ -64,7 +102,7 @@
                         id="search"
                         name="search"
                         value="{{ $search }}"
-                        placeholder="Search medical services..."
+                        placeholder="Search doctors..."
                         class="input input-bordered w-full"
                     >
 
@@ -120,7 +158,7 @@
                     </button>
 
                     <a
-                        href="{{ route('services.index') }}"
+                        href="{{ route('doctors.index') }}"
                         class="btn btn-outline"
                     >
                         Clear
@@ -133,37 +171,44 @@
         </div>
 
 
-        <div class="mt-12 grid grid-cols-1 gap-6
-                    sm:grid-cols-2 lg:grid-cols-4">
 
-            @forelse($services as $service)
+        @if($doctors->count())
 
-                <x-service-card
-                    :name="$service->name"
-                    :description="$service->description"
-                    :department="$service->department->name"
-                    :slug="$service->slug"
-                    icon="🏥"
-                />
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            @empty
+                @foreach($doctors as $doctor)
 
-                <div class="col-span-full py-12 text-center">
+                    <x-doctor-card :doctor="$doctor" />
 
-                    <p class="text-gray-500">
-                        No medical services are currently available.
-                    </p>
+                @endforeach
 
-                </div>
-
-            @endforelse
-
-        </div>
+            </div>
 
 
-        <div class="mt-12">
-            {{ $services->links() }}
-        </div>
+            {{-- Pagination --}}
+            <div class="mt-12">
+
+                {{ $doctors->links() }}
+
+            </div>
+
+
+        @else
+
+            {{-- No Doctors --}}
+            <div class="text-center py-16">
+
+                <h2 class="text-2xl font-bold text-gray-800">
+                    No Doctors Available
+                </h2>
+
+                <p class="mt-3 text-gray-500">
+                    Our doctor information will be available soon.
+                </p>
+
+            </div>
+
+        @endif
 
     </div>
 

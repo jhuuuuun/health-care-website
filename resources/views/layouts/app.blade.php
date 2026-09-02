@@ -11,7 +11,7 @@
     >
 
     <title>
-        @yield('title', '[Hospital Name]')
+        @yield('title', 'Hospital')
     </title>
 
     @vite([

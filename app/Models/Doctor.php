@@ -5,14 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Service extends Model
+class Doctor extends Model
 {
     protected $fillable = [
         'department_id',
-        'name',
+        'fname',
+        'mname',
+        'lname',
         'slug',
-        'description',
-        'image',
+        'specialization',
+        'credentials',
+        'biography',
+        'photo',
         'schedule',
         'status',
     ];
@@ -25,8 +29,13 @@ class Service extends Model
     {
         return $this->belongsTo(Department::class);
     }
+
+    public function getFullNameAttribute(): string
+    {
+        return trim(
+            $this->fname . ' ' .
+            ($this->mname ? $this->mname . ' ' : '') .
+            $this->lname
+        );
+    }
 }
-
-
-
-
