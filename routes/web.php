@@ -10,10 +10,6 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::get('/services', function () {
-    return view('services.index');
-})->name('services.index');
-
 Route::get('/packages', function () {
     return view('packages.index');
 })->name('packages.index');
@@ -33,3 +29,18 @@ Route::get('/contact', function () {
 Route::get('/appointments/create', function () {
     return view('appointments.create');
 })->name('appointments.create');
+
+use App\Http\Controllers\ServiceController;
+
+Route::get('/services', [ServiceController::class, 'index'])
+    ->name('services.index');
+
+    Route::get('/services/{slug}', [ServiceController::class, 'show'])
+    ->name('services.show');
+
+
+    use App\Http\Controllers\HomeController;
+
+Route::get('/', [HomeController::class, 'index'])
+    ->name('home');
+    

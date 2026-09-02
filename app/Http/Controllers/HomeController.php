@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Service;
 
 class HomeController extends Controller
 {
@@ -10,18 +10,17 @@ class HomeController extends Controller
     {
         $hospitalName = 'Health Care Website Development';
 
-        $telephone ='090909090909';
+        $telephone = '090909090909';
 
-        $emergency = 'Emergecy Contact';
+        $emergency = 'Emergency Contact';
 
-        $isOpen = 'True';
+        $isOpen = true;
 
-        $services = [
-                        'Emergency Care',
-                        'Cardiology',
-                        'Laboratory',
-                        'Radiology'
-                    ];
+        $services = Service::with('department')
+            ->where('status', true)
+            ->latest()
+            ->take(4)
+            ->get();
 
         return view('home', compact(
             'hospitalName',
@@ -29,6 +28,6 @@ class HomeController extends Controller
             'emergency',
             'isOpen',
             'services'
-            ));
+        ));
     }
 }

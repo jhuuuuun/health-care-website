@@ -15,6 +15,10 @@ class Department extends Model
         'status',
     ];
 
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
     public function services(): HasMany
     {
         return $this->hasMany(Service::class);

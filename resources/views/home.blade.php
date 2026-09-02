@@ -1,3 +1,7 @@
+@props([
+    'services' => collect(),
+])
+
 @extends('layouts.app')
 
 @section('title', 'Home')
@@ -8,7 +12,6 @@
 
 <x-welcome />
 
-<x-services-section />
-
+<x-services-section :services="$services" />
 
 @endsection

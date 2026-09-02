@@ -17,6 +17,10 @@ class Service extends Model
         'status',
     ];
 
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);

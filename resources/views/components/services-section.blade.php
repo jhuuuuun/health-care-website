@@ -1,3 +1,7 @@
+@props([
+    'services' => collect(),
+])
+
 <section class="bg-gray-50">
 
     <div class="max-w-7xl mx-auto px-6 py-20 lg:py-24">
@@ -29,47 +33,27 @@
                     lg:grid-cols-4
                     gap-6">
 
-            <x-service-card
-                name="Cardiology"
-                description="Comprehensive care for heart and cardiovascular conditions."
-                department="Specialty Care"
-                icon="🫀"
-            />
+            @forelse($services as $service)
 
-            <x-service-card
-                name="Emergency Care"
-                description="Prompt medical attention for urgent and emergency conditions."
-                department="Emergency"
-                icon="🚑"
-            />
+                <x-service-card
+                    :name="$service->name"
+                    :description="$service->description"
+                    :department="$service->department->name"
+                    :slug="$service->slug"
+                    icon="🏥"
+                />
 
-            <x-service-card
-                name="Laboratory"
-                description="Reliable laboratory testing to support accurate diagnosis."
-                department="Diagnostics"
-                icon="🔬"
-            />
+            @empty
 
-            <x-service-card
-                name="Radiology"
-                description="Diagnostic imaging services to help physicians evaluate patient conditions."
-                department="Diagnostics"
-                icon="🩻"
-            />
+                <div class="col-span-full py-12 text-center">
 
-            <x-service-card
-                name="Pediatrics"
-                description="Healthcare services focused on the health and well-being of children."
-                department="Medical Specialty"
-                icon="👶"
-            />
+                    <p class="text-gray-500">
+                        No medical services are currently available.
+                    </p>
 
-            <x-service-card
-                name="Pharmacy"
-                description="Convenient access to prescribed medicines and pharmaceutical services."
-                department="Patient Services"
-                icon="💊"
-            />
+                </div>
+
+            @endforelse
 
         </div>
 

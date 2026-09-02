@@ -32,7 +32,7 @@
                 <div class="mt-8 flex flex-col sm:flex-row gap-4">
 
                     <a
-                        href="{{ route('appointments.create') }}"
+                        href="#"
                         class="btn btn-success btn-lg"
                     >
                         Book an Appointment
