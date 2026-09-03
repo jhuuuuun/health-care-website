@@ -162,12 +162,21 @@
             Book an Appointment
         </a>
 
-        <a
-            href="tel:[Emergency Hotline]"
-            class="btn btn-error"
-        >
-            Emergency
-        </a>
+        @auth
+            <a
+                href="{{ route('admin.dashboard') }}"
+                class="btn btn-info hidden sm:flex"
+            >
+                Admin
+            </a>
+        @else
+            <a
+                href="{{ route('login') }}"
+                class="btn btn-error"
+            >
+                Login
+            </a>
+        @endauth
 
     </div>
 

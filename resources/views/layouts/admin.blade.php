@@ -83,11 +83,22 @@
                 </a>
 
                 <a
-                    href="{{ route('doctors.index') }}"
+                    href="{{ route('home') }}"
                     class="rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-green-700"
                 >
                     View Website
                 </a>
+
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <button
+                        type="submit"
+                        class="rounded-lg px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50"
+                    >
+                        Logout
+                    </button>
+                </form>
 
             </nav>
 
