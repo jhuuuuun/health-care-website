@@ -453,4 +453,14 @@ class DoctorController extends Controller
             ->route('admin.doctors.index')
             ->with('success', 'Doctor deleted successfully.');
     }
+
+    public function show(Doctor $doctor)
+    {
+        $doctor->load('department');
+
+        return view(
+            'admin.doctors.show',
+            compact('doctor')
+        );
+    }
 }

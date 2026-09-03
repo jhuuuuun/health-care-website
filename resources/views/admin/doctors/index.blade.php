@@ -1,4 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
+@section('title', 'Manage Doctors')
 
 @section('content')
 
@@ -318,8 +320,8 @@
                                     <div class="flex justify-end gap-2">
 
                                         <a
-                                            href="{{ route('doctors.show', $doctor->slug) }}"
-                                            class="btn btn-sm btn-outline"
+                                            href="{{ route('admin.doctors.show', $doctor) }}"
+                                            class="btn btn-sm btn-info"
                                         >
                                             View
                                         </a>

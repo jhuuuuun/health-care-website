@@ -1,86 +1,81 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
+@section('title', 'Doctor Details')
 
 @section('content')
 
-{{-- Page Header --}}
-<div
-    class="relative bg-cover bg-center bg-no-repeat"
-    style="background-image: url('{{ asset('images/hospital-bg.jpg') }}');"
->
+<div class="min-h-screen bg-gray-50">
 
-    {{-- Green Overlay --}}
-    <div class="absolute inset-0 bg-green-800/75"></div>
+    {{-- Header --}}
+    <div
+        class="relative bg-cover bg-center bg-no-repeat"
+        style="background-image: url('{{ asset('images/hospital-bg.jpg') }}');"
+    >
 
-    <div class="relative max-w-7xl mx-auto px-6 py-16 text-center text-white">
+        <div class="absolute inset-0 bg-green-800/80"></div>
 
-        <p class="text-green-100 text-sm font-semibold uppercase tracking-wider">
-            Our Medical Team
-        </p>
+        <div class="relative mx-auto max-w-7xl px-6 py-16 text-white">
 
-        <h1 class="mt-3 text-4xl md:text-5xl font-bold">
-            Doctor Profile
-        </h1>
+            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 
+                <div>
+                    <p class="text-sm font-semibold uppercase tracking-wider text-green-200">
+                        Administration
+                    </p>
+
+                    <h1 class="mt-2 text-3xl font-bold md:text-4xl">
+                        Doctor Details
+                    </h1>
+
+                    <p class="mt-2 text-green-100">
+                        View complete doctor information.
+                    </p>
+                </div>
+
+                <a
+                    href="{{ route('admin.doctors.index') }}"
+                    class="btn btn-outline border-white text-white hover:bg-white hover:text-green-700"
+                >
+                    ← Back to Doctors
+                </a>
+
+            </div>
+
+        </div>
     </div>
 
-</div>
 
+    {{-- Doctor Information --}}
+    <div class="mx-auto max-w-5xl px-6 py-12">
 
-{{-- Doctor Profile --}}
-<section class="bg-gray-50">
+        <div class="rounded-3xl bg-white p-6 shadow-sm md:p-10">
 
-    <div class="max-w-6xl mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
 
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-
-            <div class="grid grid-cols-1 lg:grid-cols-3">
-
-                {{-- Doctor Photo --}}
-                <div class="bg-green-50">
+                {{-- Photo --}}
+                <div class="md:col-span-1">
 
                     @if($doctor->photo)
 
                         <img
                             src="{{ asset('storage/' . $doctor->photo) }}"
                             alt="{{ $doctor->full_name }}"
-                            class="w-full h-full min-h-[400px] object-cover"
+                            class="h-80 w-full rounded-2xl object-cover shadow-sm"
                         >
 
                     @else
 
-                        <div class="min-h-[400px] flex items-center justify-center">
+                        <div class="flex h-80 w-full items-center justify-center rounded-2xl bg-green-100">
 
-                            <div class="text-center">
-
-                                <div
-                                    class="w-32 h-32 mx-auto rounded-full
-                                           bg-green-100 flex items-center
-                                           justify-center"
-                                >
-
-                                    <svg
-                                        class="w-16 h-16 text-green-600"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="1.5"
-                                            d="M5.121 17.804A9 9 0 1118.879 17.8M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                                        />
-
-                                    </svg>
-
-                                </div>
-
-                                <p class="mt-4 text-green-600 font-medium">
-                                    Doctor Photo
-                                </p>
-
-                            </div>
+                            <svg
+                                class="h-24 w-24 text-green-600"
+                                fill="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                                />
+                            </svg>
 
                         </div>
 
@@ -89,134 +84,124 @@
                 </div>
 
 
-                {{-- Doctor Information --}}
-                <div class="lg:col-span-2 p-8 lg:p-12">
+                {{-- Information --}}
+                <div class="md:col-span-2">
 
-                    {{-- Specialization --}}
-                    <p class="text-sm font-semibold uppercase tracking-wider text-green-600">
-                        {{ $doctor->specialization }}
-                    </p>
+                    <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
 
+                        <div>
 
-                    {{-- Name --}}
-                    <h2 class="mt-3 text-3xl md:text-4xl font-bold text-gray-900">
-                        Dr. {{ $doctor->full_name }}
-                    </h2>
+                            <p class="text-sm font-semibold uppercase tracking-wider text-green-600">
+                                {{ $doctor->specialization }}
+                            </p>
 
+                            <h2 class="mt-2 text-3xl font-bold text-gray-900">
+                                Dr. {{ $doctor->full_name }}
+                            </h2>
 
-                    {{-- Department --}}
-                    @if($doctor->department)
+                        </div>
 
-                        <div class="mt-4 flex items-center gap-2 text-gray-600">
+                        @if($doctor->status)
 
-                            <svg
-                                class="w-5 h-5 text-green-600"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M3 21h18M5 21V5a2 2 0 012-2h10a2 2 0 012 2v16M9 7h2m-2 4h2m4-4h2m-2 4h2M9 21v-4h6v4"
-                                />
-
-                            </svg>
-
-                            <span>
-                                {{ $doctor->department->name }}
+                            <span class="badge badge-success badge-lg">
+                                Active
                             </span>
 
+                        @else
+
+                            <span class="badge badge-error badge-lg">
+                                Inactive
+                            </span>
+
+                        @endif
+
+                    </div>
+
+
+                    {{-- Details --}}
+                    <div class="mt-8 space-y-6">
+
+                        <div>
+                            <p class="text-sm font-semibold text-gray-500">
+                                Department
+                            </p>
+
+                            <p class="mt-1 text-lg text-gray-900">
+                                {{ $doctor->department->name }}
+                            </p>
                         </div>
 
-                    @endif
 
-
-                    {{-- Credentials --}}
-                    @if($doctor->credentials)
-
-                        <div class="mt-6">
-
-                            <h3 class="text-lg font-semibold text-gray-900">
+                        <div>
+                            <p class="text-sm font-semibold text-gray-500">
                                 Credentials
-                            </h3>
-
-                            <p class="mt-2 text-gray-600">
-                                {{ $doctor->credentials }}
                             </p>
 
+                            <p class="mt-1 text-lg text-gray-900">
+                                {{ $doctor->credentials ?: 'Not provided' }}
+                            </p>
                         </div>
 
-                    @endif
 
-
-                    {{-- Biography --}}
-                    @if($doctor->biography)
-
-                        <div class="mt-8">
-
-                            <h3 class="text-lg font-semibold text-gray-900">
-                                About the Doctor
-                            </h3>
-
-                            <p class="mt-3 leading-7 text-gray-600">
-                                {{ $doctor->biography }}
+                        <div>
+                            <p class="text-sm font-semibold text-gray-500">
+                                Schedule
                             </p>
 
+                            <p class="mt-1 text-lg text-gray-900">
+                                {{ $doctor->schedule ?: 'Not provided' }}
+                            </p>
                         </div>
 
-                    @endif
 
+                        <div>
+                            <p class="text-sm font-semibold text-gray-500">
+                                Biography
+                            </p>
 
-                    {{-- Schedule --}}
-                    @if($doctor->schedule)
-
-                        <div class="mt-8">
-
-                            <h3 class="text-lg font-semibold text-gray-900">
-                                Consultation Schedule
-                            </h3>
-
-                            <div class="mt-3 p-4 rounded-xl bg-green-50 border border-green-100">
-
-                                <p class="text-green-800">
-                                    {{ $doctor->schedule }}
-                                </p>
-
-                            </div>
-
+                            <p class="mt-2 leading-7 text-gray-600">
+                                {{ $doctor->biography ?: 'No biography provided.' }}
+                            </p>
                         </div>
 
-                    @endif
+                    </div>
 
 
-                    {{-- Buttons --}}
-                    <div class="mt-10 flex flex-col sm:flex-row gap-4">
+                    {{-- Actions --}}
+                    <div class="mt-10 flex flex-wrap gap-3">
 
                         <a
-                            href="{{ route('appointments.create') }}"
-                            class="inline-flex items-center justify-center
-                                   px-6 py-3 rounded-lg
-                                   bg-green-700 text-white font-semibold
-                                   hover:bg-green-800
-                                   transition"
+                            href="{{ route('admin.doctors.edit', $doctor) }}"
+                            class="btn btn-success"
                         >
-                            Book an Appointment
+                            Edit Doctor
                         </a>
 
 
-                        <a
-                            href="{{ route('doctors.index') }}"
-                            class="inline-flex items-center justify-center
-                                   px-6 py-3 rounded-lg
-                                   border border-green-700
-                                   text-green-700 font-semibold
-                                   hover:bg-green-50
-                                   transition"
+                        <form
+                            action="{{ route('admin.doctors.destroy', $doctor) }}"
+                            method="POST"
+                            onsubmit="return confirm('Are you sure you want to delete this doctor?');"
                         >
-                            ← Back to Doctors
+
+                            @csrf
+                            @method('DELETE')
+
+                            <button
+                                type="submit"
+                                class="btn btn-error"
+                            >
+                                Delete Doctor
+                            </button>
+
+                        </form>
+
+
+                        <a
+                            href="{{ route('admin.doctors.index') }}"
+                            class="btn btn-outline"
+                        >
+                            Back
                         </a>
 
                     </div>
@@ -229,6 +214,6 @@
 
     </div>
 
-</section>
+</div>
 
 @endsection

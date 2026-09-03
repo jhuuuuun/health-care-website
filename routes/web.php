@@ -47,7 +47,7 @@ Route::get('/services', [ServiceController::class, 'index'])
     Route::get('/doctors/{slug}', [DoctorController::class, 'show'])
         ->name('doctors.show');
 
-
+    use App\Http\Controllers\Admin\DashboardController;
     use App\Http\Controllers\Admin\DoctorController as AdminDoctorController;
 
     Route::get('/admin/doctors/create', [AdminDoctorController::class, 'create'])
@@ -67,3 +67,9 @@ Route::get('/services', [ServiceController::class, 'index'])
     
     Route::delete('/admin/doctors/{doctor}', [AdminDoctorController::class, 'destroy'])
         ->name('admin.doctors.destroy');
+
+    Route::get('/admin/doctors/{doctor}', [AdminDoctorController::class, 'show'])
+        ->name('admin.doctors.show');
+
+    Route::get('/admin', [DashboardController::class, 'index'])
+        ->name('admin.dashboard');
