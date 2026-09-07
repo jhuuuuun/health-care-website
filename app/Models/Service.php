@@ -17,16 +17,15 @@ class Service extends Model
         'status',
     ];
 
-    protected $casts = [
-        'status' => 'boolean',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'status' => 'boolean',
+        ];
+    }
 
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
     }
 }
-
-
-
-

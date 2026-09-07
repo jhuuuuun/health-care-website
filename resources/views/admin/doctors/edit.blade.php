@@ -355,12 +355,13 @@
                         Replace Photo
                     </label>
 
+
                     <input
                         type="file"
                         id="photo"
                         name="photo"
                         accept="image/jpeg,image/png,image/webp"
-                        class="mt-2 block w-full text-sm text-gray-600 border rounded-lg p-2"
+                        class="block w-full rounded-lg border border-gray-300 bg-white text-sm text-gray-600 file:mr-4 file:border-0 file:bg-green-50 file:px-4 file:py-3 file:text-sm file:font-semibold file:text-green-700 hover:file:bg-green-100"
                     >
 
                     <p class="mt-2 text-xs text-gray-500">

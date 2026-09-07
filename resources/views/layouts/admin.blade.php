@@ -83,6 +83,20 @@
                 </a>
 
                 <a
+                    href="{{ route('admin.departments.index') }}"
+                    class="rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-green-700"
+                >
+                    Departments
+                </a>
+
+                <a
+                    href="{{ route('admin.services.index') }}"
+                    class="rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-green-700"
+                >
+                    Services
+                </a>
+
+                <a
                     href="{{ route('admin.users.index') }}"
                     class="rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-green-700"
                 >

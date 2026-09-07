@@ -8,6 +8,8 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DoctorController as AdminDoctorController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\DepartmentController as AdminDepartmentController;
+use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,6 +111,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::delete('/admin/doctors/{doctor}', [AdminDoctorController::class, 'destroy'])
         ->name('admin.doctors.destroy');
+
+    Route::resource('/admin/departments', AdminDepartmentController::class)
+        ->names('admin.departments');
+
+    Route::resource('/admin/services', AdminServiceController::class)
+        ->names('admin.services');
 });
 
 

@@ -11,13 +11,23 @@ class Department extends Model
         'name',
         'slug',
         'description',
-        'image',
         'status',
     ];
 
-    protected $casts = [
-        'status' => 'boolean',
-    ];
+
+    protected function casts(): array
+    {
+        return [
+            'status' => 'boolean',
+        ];
+    }
+
+
+    public function doctors(): HasMany
+    {
+        return $this->hasMany(Doctor::class);
+    }
+
 
     public function services(): HasMany
     {
