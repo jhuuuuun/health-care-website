@@ -83,6 +83,13 @@
                 </a>
 
                 <a
+                    href="{{ route('admin.users.index') }}"
+                    class="rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-green-700"
+                >
+                    Users
+                </a>
+
+                <a
                     href="{{ route('home') }}"
                     class="rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-green-700"
                 >

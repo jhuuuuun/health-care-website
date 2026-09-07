@@ -7,6 +7,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DoctorController as AdminDoctorController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,7 +71,20 @@ Route::get('/doctors/{slug}', [DoctorController::class, 'show'])
 |--------------------------------------------------------------------------
 */
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
+
+    // User routes...
+
+    Route::get('/admin', [DashboardController::class, 'index'])
+        ->name('admin.dashboard');
+
+    Route::get('/admin/users', [AdminUserController::class, 'index'])
+        ->name('admin.users.index');
+
+    Route::patch('/admin/users/{user}/toggle-admin', [AdminUserController::class, 'toggleAdmin'])
+        ->name('admin.users.toggle-admin');
+
+    // Doctor routes...
 
     Route::get('/admin', [DashboardController::class, 'index'])
         ->name('admin.dashboard');
